@@ -1,0 +1,17 @@
+{
+    "contents" : "library (raster)\nlibrary (dismo)\nlibrary (rJava)\nlibrary (sp)\nlibrary (rgdal)\n\nrun_models<- function (species, variables)\n{\n  i<-0\n  res<- list ()\n  for (x in species)\n  {\n    i<-i+1\n    print(length(species)-i)\n    occ<- \n    \n        #run models\n        #bioclim, threshold=percentil 5\n        model_bioclim<- bioclim (variables, occ)\n        map_bioclim<- predict (model_bioclim, variables)\n        map_bioclim_reclass<- reclassify (map_bioclim, c(-Inf, 0.05, 0, 0.05, 1, 1))\n    \n        tss_bio<- validate (map_bioclim_reclass, validation_occ, validation_abs)\n        \n        bioclim_model<- list (tss_bio= tss_bio, bioclim= model_bioclim)\n        \n        # run mahalanobis, threshold percentil 5\n        model_maha<- mahal (variables, occ)\n        map_maha<- predict (model_maha, variables)\n        t<- quantile (extract (map_maha, occ), na.rm=T, 0.05)\n        map_maha_reclass<- reclassify (map_maha, c(-Inf, t, 0, t, 1, 1))\n        tss_maha<- validate(map_maha_reclass, validation_occ, validation_abs)\n        maha_model<- list (tss_maha= tss_maha, maha= model_maha)\n        \n        model_maxent<- maxent (variables, occ)\n        map_maxent<- predict (model_maxent, variables)\n        t<- model_maxent@results [which (rownames (model_maxent@results)== \"Maximum.training.sensitivity.plus.specificity.logistic.threshold\")]\n        map_maxent_reclass<- reclassify (map_maxent, c(-Inf, t, 0, t, 1, 1))\n        tss_maxent<- validate(map_maxent_reclass, validation_occ, validation_abs)\n        \n        maxent_model<- list (tss_maxent= tss_maxent, maxent= model_maxent)\n        \n        res[[i]] <- list (bioclim=bioclim_model, mahalanobis= maha_model, maxent=maxent_model)\n        names (res[[i]])<- c(species_name,\n                             species_name,\n                             species_name)\n        \n        if (length (res)==10){\n          save (res, file = paste (\"models_WC_\", i, \"res.RData\", sep=\"\"))\n          exp<- exp+1\n          res<- list()\n        }\n        \n      }\n    }\n  }\n}\n\n\n\n\n\n\n\n",
+    "created" : 1392146940122.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "524888987",
+    "id" : "40F0B722",
+    "lastKnownWriteTime" : 1392152446,
+    "path" : "~/_CIENCIAS/odonata/odonata_corotipos/ajust_models.R",
+    "project_path" : "ajust_models.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

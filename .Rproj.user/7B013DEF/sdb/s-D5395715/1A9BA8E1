@@ -1,0 +1,17 @@
+{
+    "contents" : "\n\nproject_bioclim (variables)\nproject_maha (variables)\nproject_maxent (variables)",
+    "created" : 1392152075209.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3976452999",
+    "id" : "1A9BA8E1",
+    "lastKnownWriteTime" : 1392152170,
+    "path" : "~/_CIENCIAS/odonata/odonata_corotipos/run_bioclim.R",
+    "project_path" : "run_bioclim.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
