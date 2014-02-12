@@ -4,7 +4,6 @@ library (rJava)
 library (sp)
 library (rgdal)
 
-
 run_models<- function (species, variables)
 {
   i<-0
